@@ -24,24 +24,16 @@ class RestaurantAdapter(
             restaurant: Restaurant,
             onItemClick: (restaurant: Restaurant) -> Unit
         ) {
-             val listToString = fun(list:List<String>):String{
-                 var res=""
-                 list.forEach {
-                     res+it
-                 }
-                 Log.i("type","types are $res")
-                 return res
 
-             }
             itemView.apply {
                 this.findViewById<TextView>(R.id.title).text = restaurant.name
                 this.findViewById<TextView>(R.id.rate).text = restaurant.rating.toString()
                 this.findViewById<TextView>(R.id.type).text = restaurant.plus_code.compound_code
                 this.findViewById<TextView>(R.id.price).text = "$"
-                this.findViewById<TextView>(R.id.price).append(restaurant.price_level?.toString()?:"2")
+                this.findViewById<TextView>(R.id.price)
+                    .append(restaurant.price_level?.toString() ?: "2")
                 this.findViewById<TextView>(R.id.status).text = restaurant.business_status
                 this.findViewById<TextView>(R.id.vicinity).text = restaurant.vicinity
-                val button = this.findViewById<ImageButton>(R.id.btn)
                 Glide.with(context).load(Uri.parse(restaurant.icon)).into(icon);
                 itemView.setOnClickListener {
                     onItemClick(restaurant)
@@ -69,8 +61,6 @@ class RestaurantAdapter(
         this.restaurants.apply {
             clear()
             addAll(restaurants)
-//            notifyDataSetChanged()
-            print(restaurants.toString())
         }
     }
 

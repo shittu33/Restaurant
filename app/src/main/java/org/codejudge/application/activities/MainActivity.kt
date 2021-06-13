@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
-import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,10 +28,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.i("API URL : ", ConfigHelper.getConfigValue(this, "api_url"));
         rcv = findViewById(R.id.rcv)
         val editSearch: EditText  = findViewById(R.id.edit_search)
-        editSearch.doOnTextChanged(fun(newText: CharSequence?, _: Int, _: Int, after: Int) {
-            if (newText != null) {
+        initAdapter()
+
+        editSearch.doAfterTextChanged {
+            val newText = it.toString()
+            if (it != null && newText.isNotEmpty()) {
                 ApiDao.getSearchedRes(":$newText").enqueue(object : Callback<Restaurants> {
                     override fun onResponse(
                         call: Call<Restaurants>,
@@ -55,46 +60,7 @@ class MainActivity : AppCompatActivity() {
 
                 })
             }
-        })
-//        editSearch.
-//        setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                Log.i("search", "Text Submitted!")
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                if (newText != null) {
-//                    ApiDao.getSearchedRes(":$newText").enqueue(object : Callback<Restaurants> {
-//                        override fun onResponse(
-//                            call: Call<Restaurants>,
-//                            response: Response<Restaurants>
-//                        ) {
-//                            response.body().let {
-//                                if (it != null) {
-//                                    adapter.apply {
-//                                        addRestaurants(it.results)
-//                                        notifyDataSetChanged()
-//                                        Log.i("adapter", "adapter")
-//                                    }
-//                                } else {
-//                                    Toast.makeText(applicationContext, "Api is empty", Toast.LENGTH_SHORT)
-//                                        .show()
-//                                }
-//                            }
-//                        }
-//
-//                        override fun onFailure(call: Call<Restaurants>, t: Throwable) {
-//                        }
-//
-//                    })
-//                }
-//                return false
-//            }
-//
-//        })
-        Log.i("API URL : ", ConfigHelper.getConfigValue(this, "api_url"));
-        initAdapter()
+        }
         ApiDao.getAllRestaurants().enqueue(object : Callback<Restaurants> {
             override fun onResponse(call: Call<Restaurants>, response: Response<Restaurants>) {
 //                txtResult.text= response.body()?.results.toString()
@@ -113,7 +79,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<Restaurants>, t: Throwable) {
-//                    throw  t
             }
         })
 
