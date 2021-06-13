@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.list_item.view.*
 import org.codejudge.application.R
-import org.codejudge.application.Restaurant
+import org.codejudge.application.api.Restaurant
 
 class RestaurantAdapter(
     private val restaurants: ArrayList<Restaurant>,

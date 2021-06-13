@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
-<SearchView
+<EditText
     android:id="@+id/edit_search"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:hint="@string/search_restaurants"
+    android:layout_height="wrap_content"
+    android:autofillHints="true"
+    android:inputType="text" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
         android:layout_width="match_parent"
