@@ -1,4 +1,4 @@
-package org.codejudge.application.api
+package org.abdulmujeeb.application.api
 
 import retrofit2.Call
 import retrofit2.Retrofit

@@ -1,9 +1,9 @@
-package org.codejudge.application.helper;
+package org.abdulmujeeb.application.helper;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
-import org.codejudge.application.R;
+import org.abdulmujeeb.application.R;
 
 import java.io.IOException;
 import java.io.InputStream;

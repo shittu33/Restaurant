@@ -1,4 +1,4 @@
-package org.codejudge.application
+package org.abdulmujeeb.application
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

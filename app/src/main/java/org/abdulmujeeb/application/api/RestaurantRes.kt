@@ -1,4 +1,4 @@
-package org.codejudge.application.api
+package org.abdulmujeeb.application.api
 
 data class Restaurants(
     val html_attributions: List<Any>,

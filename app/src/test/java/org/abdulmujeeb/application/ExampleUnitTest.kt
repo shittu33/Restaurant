@@ -1,4 +1,4 @@
-package org.codejudge.application
+package org.abdulmujeeb.application
 
 import org.junit.Test
 
